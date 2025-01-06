@@ -1,0 +1,10 @@
+[tools]
+shellcheck = "0.10.0"
+shfmt = "3.10.0"
+
+# The tools listed below are used in the project.
+# However, you probably installed them globally.
+# awk    = "5.3.1"  # https://gnu.org/software/gawk/
+# grep   = "3.11"   # https://gnu.org/software/grep/
+# make   = "4.4.1"  # https://gnu.org/software/make/
+# yq     = "4.44.6"
