@@ -29,8 +29,9 @@ Once you have created the `gh-pages` branch, you can add this action to your wor
     # Default: gh-pages
     branch:
 
-    # Number of commits to keep. Set to 0 to keep all commits.
-    # Default: 3
+    # Number of comments between the first and last commit to keep. Set to -1 to
+    # keep all of them.
+    # Default: 2
     keep:
 ```
 

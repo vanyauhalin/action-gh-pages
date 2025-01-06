@@ -13,8 +13,8 @@ inputs:
     default: gh-pages
 
   keep:
-    description: Number of commits to keep. Set to 0 to keep all commits.
-    default: 3
+    description: Number of comments between the first and last commit to keep. Set to -1 to keep all of them.
+    default: 2
 
 runs:
   using: composite

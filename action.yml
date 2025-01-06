@@ -10,8 +10,8 @@ inputs:
     description: Branch to publish changes to.
     default: gh-pages
   keep:
-    description: Number of commits to keep. Set to 0 to keep all commits.
-    default: 3
+    description: Number of comments between the first and last commit to keep. Set to -1 to keep all of them.
+    default: 2
 runs:
   using: composite
   steps:
@@ -94,20 +94,34 @@ runs:
         }
 
         commit() {
-        	message="Update following $(echo "$ACTION_SHA" | cut -c -8)"
+        	bare="$ACTION_SERVER_URL/$ACTION_REPOSITORY"
+        	head="Update following $(echo "$ACTION_SHA" | cut -c -8)"
+        	body="Commit: $bare/commit/$ACTION_SHA/\n"
+        	body="$body\Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
+        	body="$body\Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
 
-        	desc="Commit: $ACTION_SERVER_URL/$ACTION_REPOSITORY/commit/$ACTION_SHA/\n"
-        	desc="$desc\Run: $ACTION_SERVER_URL/$ACTION_REPOSITORY/actions/runs/$ACTION_RUN_ID/\n"
-        	desc="$desc\Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
+        	git commit --message "$head" --message "$body" --quiet
 
-        	git commit --message "$message" --message "$desc" --quiet
-
-        	if [ "$ACTION_KEEP" -ne 0 ]; then
-        		git reset --hard "HEAD~$ACTION_KEEP" --quiet
-        		git push --force --quiet
-        	else
+        	if [ "$ACTION_KEEP" -eq -1 ]; then
         		git push --quiet
+        		return
         	fi
+
+        	list=$(git rev-list HEAD | tail -n +2)
+
+        	gap=$(echo "$list" | head -n -1 | wc -l)
+        	if [ "$gap" -le "$ACTION_KEEP" ]; then
+        		git push --quiet
+        		return
+        	fi
+
+        	from=$(echo "$list" | tail -n -1)
+        	to=$(echo "$list" | head -n "+$ACTION_KEEP")
+
+        	GIT_SEQUENCE_EDITOR="sed --in-place 's/^pick/drop/'" \
+        		git rebase --interactive "$from" "$to"
+
+        	git push --force --quiet
         }
 
         log() {
