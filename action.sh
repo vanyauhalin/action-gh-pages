@@ -7,6 +7,7 @@ set -ue
 : "${ACTION_REPOSITORY:=""}"
 : "${ACTION_BRANCH:=""}"
 : "${ACTION_CHECK:=1}"
+: "${ACTION_RESET:=1}"
 : "${ACTION_SHA:=""}"
 : "${ACTION_RUN_ID:=0}"
 
@@ -14,6 +15,7 @@ main() {
 	status=0
 
 	ACTION_CHECK=$(to_bool "$ACTION_CHECK" 1)
+	ACTION_RESET=$(to_bool "$ACTION_RESET" 1)
 
 	dir=$(mktemp -d)
 
@@ -41,15 +43,17 @@ main() {
 		log "[info] The branch is not up-to-date."
 	fi
 
-	log "[info] Resetting the branch."
+	if [ "$ACTION_RESET" -ne 0 ]; then
+		log "[info] Resetting the branch."
 
-	reset || status=$?
-	if [ $status -ne 0 ]; then
-		log "[error] Failed to reset the branch with status '$status'."
-		return $status
+		reset || status=$?
+		if [ $status -ne 0 ]; then
+			log "[error] Failed to reset the branch with status '$status'."
+			return $status
+		fi
+
+		log "[info] Successfully reset the branch."
 	fi
-
-	log "[info] Successfully reset the branch."
 
 	log "[info] Committing the changes."
 

@@ -24,6 +24,7 @@ Once you have created the `gh-pages` branch, you can add this action to your wor
     working-directory: # Directory from which to publish, ./ be default.
     branch: # Branch to publish changes to, gh-pages be default.
     check: # Check if the branch is up-to-date, true by default.
+    reset: # Reset the branch before publishing, true by default.
 ```
 
 ## Motivation
