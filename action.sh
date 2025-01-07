@@ -111,7 +111,7 @@ commit() {
 	head="Update following $(echo "$ACTION_SHA" | cut -c -8)"
 	body="Commit: $bare/commit/$ACTION_SHA/\n"
 	body="${body}Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
-	body="${body}Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
+	body="${body}Date: $(date --utc)\n"
 
 	git add .
 	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
