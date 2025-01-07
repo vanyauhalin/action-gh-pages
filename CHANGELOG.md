@@ -4,6 +4,12 @@ This document records all notable changes to the project, following the [Keep a 
 
 ## [Unreleased]
 
+## [0.0.7] - 2025-01-07
+
+### Fixed
+
+- Fixed the "No such file or directory" error when copying files for the check command ([a521fc8]).
+
 ## [0.0.6] - 2025-01-07
 
 ### Fixed
@@ -61,7 +67,8 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 
 <!-- Footnotes -->
 
-[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.6...HEAD/
+[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.7...HEAD/
+[0.0.7]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.7/
 [0.0.6]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.6/
 [0.0.5]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.5/
 [0.0.4]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.4/
@@ -69,6 +76,7 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 [0.0.2]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.2/
 [0.0.1]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.1/
 
+[a521fc8]: https://github.com/vanyauhalin/action-gh-pages/commit/a521fc8b3184f76b990d13e96470acf2aaf8efd3/
 [6f19d18]: https://github.com/vanyauhalin/action-gh-pages/commit/6f19d18031c6a55540f9814898267b5af211fa26/
 [9470109]: https://github.com/vanyauhalin/action-gh-pages/commit/9470109b76f5152102e0051182dbc70c310baea8/
 [2509a9a]: https://github.com/vanyauhalin/action-gh-pages/commit/2509a9a479caa333744738137e6f9dd7a71b0a45/
