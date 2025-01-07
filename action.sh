@@ -38,7 +38,7 @@ main() {
 
 	if [ "$ACTION_CHECK" -eq 1 ]; then
 		tmp=$(mktemp -d)
-		cp -r "$cur/"* "$tmp"
+		cp -Tr "$cur" "$tmp"
 		cd "$tmp"
 
 		git add .
