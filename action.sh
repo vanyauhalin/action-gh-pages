@@ -32,6 +32,16 @@ main() {
 		return $status
 	fi
 
+	log "[info] Resetting the branch."
+
+	reset || status=$?
+	if [ $status -ne 0 ]; then
+		log "[error] Failed to reset the branch with status '$status'."
+		return $status
+	fi
+
+	log "[info] Successfully reset the branch."
+
 	log "[info] Committing the changes."
 
 	commit || status=$?
@@ -61,11 +71,13 @@ clone() {
 		"$1"
 }
 
-commit() {
+reset() {
 	init=$(git rev-list --max-parents=0 HEAD)
 
 	git reset --hard "$init" --quiet
+}
 
+commit() {
 	bare="$ACTION_SERVER_URL/$ACTION_REPOSITORY"
 	head="Update following $(echo "$ACTION_SHA" | cut -c -8)"
 	body="Commit: $bare/commit/$ACTION_SHA/\n"
