@@ -1,17 +1,14 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 
 name: Publish GitHub Pages
-description: Publish changes to GitHub Pages branch.
+description: Publish changes to GitHub Pages branch
 inputs:
   working-directory:
-    description: Directory from which to publish.
+    description: Directory from which to publish
     default: ./
   branch:
-    description: Branch to publish changes to.
+    description: Branch to publish changes to
     default: gh-pages
-  keep:
-    description: Number of comments between the first and last commit to keep. Set to -1 to keep all of them.
-    default: 2
 runs:
   using: composite
   steps:
@@ -21,7 +18,6 @@ runs:
         ACTION_SERVER_URL: ${{github.server_url}}
         ACTION_REPOSITORY: ${{github.repository}}
         ACTION_BRANCH: ${{inputs.branch}}
-        ACTION_KEEP: ${{inputs.keep}}
         ACTION_SHA: ${{github.sha}}
         ACTION_RUN_ID: ${{github.run_id}}
       working-directory: ${{inputs.working-directory}}
@@ -35,7 +31,6 @@ runs:
         : "${ACTION_SERVER_URL:=""}"
         : "${ACTION_REPOSITORY:=""}"
         : "${ACTION_BRANCH:=""}"
-        : "${ACTION_KEEP:=0}"
         : "${ACTION_SHA:=""}"
         : "${ACTION_RUN_ID:=0}"
 
@@ -44,23 +39,21 @@ runs:
 
         	dir=$(mktemp -d)
 
-        	log "[info] Cloning the repository."
+        	log "[info] Cloning the branch."
 
         	clone "$dir" || status=$?
         	if [ $status -ne 0 ]; then
-        		log "[error] Failed to clone the repository with status '$status'."
+        		log "[error] Failed to clone the branch with status '$status'."
         		return $status
         	fi
 
-        	log "[info] Successfully cloned the repository."
+        	log "[info] Successfully cloned the branch."
 
         	mv "$dir/.git" .
         	rm -rf "$dir"
 
-        	git add .
-
         	if git diff-index --quiet HEAD --; then
-        		log "[info] The repository is up-to-date."
+        		log "[info] The branch is up-to-date."
         		return $status
         	fi
 
@@ -94,33 +87,18 @@ runs:
         }
 
         commit() {
+        	init=$(git rev-list --max-parents=0 HEAD)
+
+        	git reset --hard "$init" --quiet
+
         	bare="$ACTION_SERVER_URL/$ACTION_REPOSITORY"
         	head="Update following $(echo "$ACTION_SHA" | cut -c -8)"
         	body="Commit: $bare/commit/$ACTION_SHA/\n"
-        	body="$body\Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
-        	body="$body\Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
+        	body="${body}Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
+        	body="${body}Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
 
-        	git commit --message "$head" --message "$body" --quiet
-
-        	if [ "$ACTION_KEEP" -eq -1 ]; then
-        		git push --quiet
-        		return
-        	fi
-
-        	list=$(git rev-list HEAD | tail -n +2)
-
-        	gap=$(echo "$list" | head -n -1 | wc -l)
-        	if [ "$gap" -le "$ACTION_KEEP" ]; then
-        		git push --quiet
-        		return
-        	fi
-
-        	from=$(echo "$list" | tail -n -1)
-        	to=$(echo "$list" | head -n "+$ACTION_KEEP")
-
-        	GIT_SEQUENCE_EDITOR="sed --in-place 's/^pick/drop/'" \
-        		git rebase --interactive "$from" "$to"
-
+        	git add .
+        	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
         	git push --force --quiet
         }
 
