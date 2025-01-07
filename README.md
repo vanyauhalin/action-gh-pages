@@ -21,8 +21,8 @@ Once you have created the `gh-pages` branch, you can add this action to your wor
 - name: Publish GitHub Pages
   uses: vanyauhalin/action-gh-pages@v0
   with:
-    working-directory: # Directory from which to publish, ./ be default.
-    branch: # Branch to publish changes to, gh-pages be default.
+    working-directory: # Directory from which to publish, ./ by default.
+    branch: # Branch to publish changes to, gh-pages by default.
     check: # Check if the branch is up-to-date, true by default.
     reset: # Reset the branch before publishing, true by default.
 ```
