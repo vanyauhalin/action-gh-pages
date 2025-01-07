@@ -15,15 +15,15 @@ main() {
 
 	dir=$(mktemp -d)
 
-	log "[info] Cloning the repository."
+	log "[info] Cloning the branch."
 
 	clone "$dir" || status=$?
 	if [ $status -ne 0 ]; then
-		log "[error] Failed to clone the repository with status '$status'."
+		log "[error] Failed to clone the branch with status '$status'."
 		return $status
 	fi
 
-	log "[info] Successfully cloned the repository."
+	log "[info] Successfully cloned the branch."
 
 	mv "$dir/.git" .
 	rm -rf "$dir"
