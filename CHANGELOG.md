@@ -4,6 +4,12 @@ This document records all notable changes to the project, following the [Keep a 
 
 ## [Unreleased]
 
+## [0.0.8] - 2025-01-07
+
+### Fixed
+
+- Fixed the "not a git repository" error when copying files for the check command ([35ed9d0]).
+
 ## [0.0.7] - 2025-01-07
 
 ### Fixed
@@ -67,7 +73,8 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 
 <!-- Footnotes -->
 
-[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.7...HEAD/
+[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.8...HEAD/
+[0.0.8]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.8/
 [0.0.7]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.7/
 [0.0.6]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.6/
 [0.0.5]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.5/
@@ -76,6 +83,7 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 [0.0.2]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.2/
 [0.0.1]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.1/
 
+[35ed9d0]: https://github.com/vanyauhalin/action-gh-pages/commit/35ed9d019a44c23e1be70357198e9b8b6b597431/
 [a521fc8]: https://github.com/vanyauhalin/action-gh-pages/commit/a521fc8b3184f76b990d13e96470acf2aaf8efd3/
 [6f19d18]: https://github.com/vanyauhalin/action-gh-pages/commit/6f19d18031c6a55540f9814898267b5af211fa26/
 [9470109]: https://github.com/vanyauhalin/action-gh-pages/commit/9470109b76f5152102e0051182dbc70c310baea8/
