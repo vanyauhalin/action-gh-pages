@@ -68,10 +68,10 @@ commit() {
 	bare="$ACTION_SERVER_URL/$ACTION_REPOSITORY"
 	head="Update following $(echo "$ACTION_SHA" | cut -c -8)"
 	body="Commit: $bare/commit/$ACTION_SHA/\n"
-	body="$body\Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
-	body="$body\Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
+	body="${body}Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
+	body="${body}Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
 
-	git commit --message "$head" --message "$body" --quiet
+	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
 
 	if [ "$ACTION_KEEP" -eq -1 ]; then
 		git push --quiet
