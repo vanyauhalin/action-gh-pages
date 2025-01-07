@@ -4,6 +4,16 @@ This document records all notable changes to the project, following the [Keep a 
 
 ## [Unreleased]
 
+## [0.0.5] - 2025-01-07
+
+### Changed
+
+- Used the RFC Email date format for the commit message ([9470109]).
+
+### Fixed
+
+- Fixed the incorrect behavior of the check command ([2509a9a]).
+
 ## [0.0.4] - 2025-01-07
 
 ### Added
@@ -45,12 +55,15 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 
 <!-- Footnotes -->
 
-[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.4...HEAD/
+[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.5...HEAD/
+[0.0.5]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.5/
 [0.0.4]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.4/
 [0.0.3]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.3/
 [0.0.2]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.2/
 [0.0.1]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.1/
 
+[9470109]: https://github.com/vanyauhalin/action-gh-pages/commit/9470109b76f5152102e0051182dbc70c310baea8/
+[2509a9a]: https://github.com/vanyauhalin/action-gh-pages/commit/2509a9a479caa333744738137e6f9dd7a71b0a45/
 [6aa47e7]: https://github.com/vanyauhalin/action-gh-pages/commit/6aa47e76c4a562e39326da64d95136c972556140/
 [4d28eca]: https://github.com/vanyauhalin/action-gh-pages/commit/4d28eca471fb159a3adff9133e3528e96d8b3221/
 [571290b]: https://github.com/vanyauhalin/action-gh-pages/commit/571290b19dfb3a060fb07057bc5ebacd037167f1/
