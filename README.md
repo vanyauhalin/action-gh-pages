@@ -21,18 +21,8 @@ Once you have created the `gh-pages` branch, you can add this action to your wor
 - name: Publish GitHub Pages
   uses: vanyauhalin/action-gh-pages@v0
   with:
-    # Directory from which to publish.
-    # Default: ./
-    working-directory:
-
-    # Branch to publish changes to.
-    # Default: gh-pages
-    branch:
-
-    # Number of comments between the first and last commit to keep. Set to -1 to
-    # keep all of them.
-    # Default: 2
-    keep:
+    working-directory: # Directory from which to publish, ./ be default.
+    branch: # Branch to publish changes to, gh-pages be default.
 ```
 
 ## Motivation

@@ -1,20 +1,16 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 
 name: Publish GitHub Pages
-description: Publish changes to GitHub Pages branch.
+description: Publish changes to GitHub Pages branch
 
 inputs:
   working-directory:
-    description: Directory from which to publish.
+    description: Directory from which to publish
     default: ./
 
   branch:
-    description: Branch to publish changes to.
+    description: Branch to publish changes to
     default: gh-pages
-
-  keep:
-    description: Number of comments between the first and last commit to keep. Set to -1 to keep all of them.
-    default: 2
 
 runs:
   using: composite
@@ -25,7 +21,6 @@ runs:
       ACTION_SERVER_URL: ${{github.server_url}}
       ACTION_REPOSITORY: ${{github.repository}}
       ACTION_BRANCH: ${{inputs.branch}}
-      ACTION_KEEP: ${{inputs.keep}}
       ACTION_SHA: ${{github.sha}}
       ACTION_RUN_ID: ${{github.run_id}}
     working-directory: ${{inputs.working-directory}}

@@ -6,7 +6,6 @@ set -ue
 : "${ACTION_SERVER_URL:=""}"
 : "${ACTION_REPOSITORY:=""}"
 : "${ACTION_BRANCH:=""}"
-: "${ACTION_KEEP:=0}"
 : "${ACTION_SHA:=""}"
 : "${ACTION_RUN_ID:=0}"
 
@@ -63,6 +62,10 @@ clone() {
 }
 
 commit() {
+	init=$(git rev-list --max-parents=0 HEAD)
+
+	git reset --hard "$init" --quiet
+
 	bare="$ACTION_SERVER_URL/$ACTION_REPOSITORY"
 	head="Update following $(echo "$ACTION_SHA" | cut -c -8)"
 	body="Commit: $bare/commit/$ACTION_SHA/\n"
@@ -71,26 +74,6 @@ commit() {
 
 	git add .
 	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
-
-	if [ "$ACTION_KEEP" -eq -1 ]; then
-		git push --quiet
-		return
-	fi
-
-	list=$(git rev-list HEAD | tail -n +2)
-
-	gap=$(echo "$list" | head -n -1 | wc -l)
-	if [ "$gap" -le "$ACTION_KEEP" ]; then
-		git push --quiet
-		return
-	fi
-
-	from=$(echo "$list" | tail -n -1)
-	to=$(echo "$list" | head -n "+$ACTION_KEEP")
-
-	GIT_SEQUENCE_EDITOR="sed --in-place 's/^pick/drop/'" \
-		git rebase --interactive "$from" "$to"
-
 	git push --force --quiet
 }
 
