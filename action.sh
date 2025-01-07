@@ -17,10 +17,10 @@ main() {
 	ACTION_CHECK=$(to_bool "$ACTION_CHECK" 1)
 	ACTION_RESET=$(to_bool "$ACTION_RESET" 1)
 
-	acd=$(pwd)
-	brd=$(mktemp -d)
+	cur=$(pwd)
 
-	cd "$brd"
+	tmp=$(mktemp -d)
+	cd "$tmp"
 
 	log "[info] Cloning the branch."
 
@@ -32,12 +32,15 @@ main() {
 
 	log "[info] Successfully cloned the branch."
 
-	if [ "$ACTION_CHECK" -eq 1 ]; then
-		chd=$(mktemp -d)
+	mv "$tmp/.git" "$cur"
+	rmdir "$tmp"
+	cd "$cur"
 
-		cd "$chd"
-		cp -r "$acd/*" .
-		cp -r "$brd/.git" .
+	if [ "$ACTION_CHECK" -eq 1 ]; then
+		tmp=$(mktemp -d)
+		cp -r "$cur/"* "$tmp"
+		cd "$tmp"
+
 		git add .
 
 		log "[info] Checking the branch."
@@ -49,12 +52,9 @@ main() {
 
 		log "[info] The branch is not up-to-date."
 
-		rm -rf "$chd"
+		rm -rf "$tmp"
+		cd "$cur"
 	fi
-
-	cd "$acd"
-	mv "$brd/.git" .
-	rmdir "$brd"
 
 	if [ "$ACTION_RESET" -eq 1 ]; then
 		log "[info] Resetting the branch."
