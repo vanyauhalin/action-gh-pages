@@ -27,7 +27,7 @@ main() {
 	mv "$dir/.git" .
 	rm -rf "$dir"
 
-	if git diff-index --quiet HEAD --; then
+	if check; then
 		log "[info] The branch is up-to-date."
 		return $status
 	fi
@@ -69,6 +69,22 @@ clone() {
 		--single-branch \
 		"$scheme://$user:$password@$rest" \
 		"$1"
+}
+
+check() {
+	if ! git diff --quiet; then
+		return 1
+	fi
+
+	if ! git diff --cached --quiet; then
+		return 1
+	fi
+
+	if [ "$(git ls-files --exclude-standard --others | wc -l)" -ne 0 ]; then
+		return 1
+	fi
+
+	return 0
 }
 
 reset() {
