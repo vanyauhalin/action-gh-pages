@@ -32,7 +32,7 @@ main() {
 	mv "$dir/.git" .
 	rm -rf "$dir"
 
-	if [ "$ACTION_CHECK" -ne 0 ]; then
+	if [ "$ACTION_CHECK" -eq 1 ]; then
 		log "[info] Checking the branch."
 
 		if check; then
@@ -43,7 +43,7 @@ main() {
 		log "[info] The branch is not up-to-date."
 	fi
 
-	if [ "$ACTION_RESET" -ne 0 ]; then
+	if [ "$ACTION_RESET" -eq 1 ]; then
 		log "[info] Resetting the branch."
 
 		reset || status=$?
