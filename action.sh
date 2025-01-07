@@ -17,11 +17,14 @@ main() {
 	ACTION_CHECK=$(to_bool "$ACTION_CHECK" 1)
 	ACTION_RESET=$(to_bool "$ACTION_RESET" 1)
 
-	dir=$(mktemp -d)
+	acd=$(pwd)
+	brd=$(mktemp -d)
+
+	cd "$brd"
 
 	log "[info] Cloning the branch."
 
-	clone "$dir" || status=$?
+	clone || status=$?
 	if [ $status -ne 0 ]; then
 		log "[error] Failed to clone the branch with status '$status'."
 		return $status
@@ -29,10 +32,14 @@ main() {
 
 	log "[info] Successfully cloned the branch."
 
-	mv "$dir/.git" .
-	rm -rf "$dir"
-
 	if [ "$ACTION_CHECK" -eq 1 ]; then
+		chd=$(mktemp -d)
+
+		cd "$chd"
+		cp -r "$acd/*" .
+		cp -r "$brd/.git" .
+		git add .
+
 		log "[info] Checking the branch."
 
 		if check; then
@@ -41,7 +48,13 @@ main() {
 		fi
 
 		log "[info] The branch is not up-to-date."
+
+		rm -rf "$chd"
 	fi
+
+	cd "$acd"
+	mv "$brd/.git" .
+	rmdir "$brd"
 
 	if [ "$ACTION_RESET" -eq 1 ]; then
 		log "[info] Resetting the branch."
@@ -54,6 +67,8 @@ main() {
 
 		log "[info] Successfully reset the branch."
 	fi
+
+	git add .
 
 	log "[info] Committing the changes."
 
@@ -81,7 +96,7 @@ clone() {
 		--quiet \
 		--single-branch \
 		"$scheme://$user:$password@$rest" \
-		"$1"
+		.
 }
 
 check() {
@@ -109,7 +124,6 @@ commit() {
 	body="${body}Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
 	body="${body}Date: $(date --rfc-email --utc)\n"
 
-	git add .
 	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
 	git push --force --quiet
 }
