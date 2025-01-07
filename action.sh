@@ -28,10 +28,8 @@ main() {
 	mv "$dir/.git" .
 	rm -rf "$dir"
 
-	git add .
-
 	if git diff-index --quiet HEAD --; then
-		log "[info] The repository is up-to-date."
+		log "[info] The branch is up-to-date."
 		return $status
 	fi
 
@@ -71,6 +69,7 @@ commit() {
 	body="${body}Run: $bare/actions/runs/$ACTION_RUN_ID/\n"
 	body="${body}Date: $(date --utc "+%H:%M, %b %-d, %Y")\n"
 
+	git add .
 	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
 
 	if [ "$ACTION_KEEP" -eq -1 ]; then
