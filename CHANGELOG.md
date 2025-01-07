@@ -4,6 +4,20 @@ This document records all notable changes to the project, following the [Keep a 
 
 ## [Unreleased]
 
+## [0.0.3] - 2025-01-07
+
+### Changes
+
+- Improved the log messages ([786d354]).
+
+### Removed
+
+- **Breaking:** Removed the `keep` property ([80a54c4]).
+
+### Fixed
+
+- Fixed the rendering of newlines in the update commit message ([3d6a503]).
+
 ## [0.0.2] - 2025-01-07
 
 ### Fixed
@@ -16,10 +30,14 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 
 <!-- Footnotes -->
 
-[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.2...HEAD/
+[Unreleased]: https://github.com/vanyauhalin/action-gh-pages/compare/v0.0.3...HEAD/
+[0.0.3]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.3/
 [0.0.2]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.2/
 [0.0.1]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.1/
 
+[80a54c4]: https://github.com/vanyauhalin/action-gh-pages/commit/80a54c4f91ff5ee1456ba234bfb092068a62e6e1/
+[3d6a503]: https://github.com/vanyauhalin/action-gh-pages/commit/3d6a503c114c65d31c9eac42879bfb2797e299a5/
+[786d354]: https://github.com/vanyauhalin/action-gh-pages/commit/786d354525b1661a94c5e00dec6ad720ab2ee652/
 [7c15f15]: https://github.com/vanyauhalin/action-gh-pages/commit/7c15f15fb17d6a309bf687f701a9e7541bea3826/
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.1.0/
