@@ -85,11 +85,7 @@ clone() {
 }
 
 check() {
-	if ! git diff --quiet; then
-		return 1
-	fi
-
-	if ! git diff --cached --quiet; then
+	if ! git diff --quiet HEAD; then
 		return 1
 	fi
 
