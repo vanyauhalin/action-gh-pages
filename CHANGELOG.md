@@ -49,7 +49,7 @@ This document records all notable changes to the project, following the [Keep a 
 
 ### Removed
 
-- **Breaking:** Removed the `keep` property ([80a54c4]).
+- **Breaking:** Removed the keep property ([80a54c4]).
 
 ### Fixed
 
@@ -59,7 +59,7 @@ This document records all notable changes to the project, following the [Keep a 
 
 ### Fixed
 
-- Fixed completely broken property `keep` ([7c15f15]).
+- Fixed completely broken property keep ([7c15f15]).
 
 ## [0.0.1] - 2025-01-06
 
