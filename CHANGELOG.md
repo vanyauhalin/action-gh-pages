@@ -11,13 +11,17 @@ This document records all notable changes to the project, following the [Keep a 
 - Added the ability to reset the branch before publishing ([4d28eca]).
 - Added the ability to check if the branch is up-to-date ([571290b]).
 
+### Changed
+
+- Replaced the custom date format with the default one ([6aa47e7]).
+
 ### Fixed
 
 - Fixed the wrong selection of commands for checking the state of the branch ([1c2b4e3]).
 
 ## [0.0.3] - 2025-01-07
 
-### Changes
+### Changed
 
 - Improved the log messages ([786d354]).
 
@@ -47,6 +51,7 @@ This is the first, initial release. The version 0.0.1 was chosen to test the pub
 [0.0.2]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.2/
 [0.0.1]: https://github.com/vanyauhalin/action-gh-pages/releases/tag/v0.0.1/
 
+[6aa47e7]: https://github.com/vanyauhalin/action-gh-pages/commit/6aa47e76c4a562e39326da64d95136c972556140/
 [4d28eca]: https://github.com/vanyauhalin/action-gh-pages/commit/4d28eca471fb159a3adff9133e3528e96d8b3221/
 [571290b]: https://github.com/vanyauhalin/action-gh-pages/commit/571290b19dfb3a060fb07057bc5ebacd037167f1/
 [1c2b4e3]: https://github.com/vanyauhalin/action-gh-pages/commit/1c2b4e3031b9998429e555c6a0223fa7bdf69678/
