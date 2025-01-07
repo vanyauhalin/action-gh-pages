@@ -12,6 +12,10 @@ inputs:
     description: Branch to publish changes to
     default: gh-pages
 
+  check:
+    description: Check if the branch is up-to-date
+    default: true
+
 runs:
   using: composite
   steps:
@@ -21,6 +25,7 @@ runs:
       ACTION_SERVER_URL: ${{github.server_url}}
       ACTION_REPOSITORY: ${{github.repository}}
       ACTION_BRANCH: ${{inputs.branch}}
+      ACTION_CHECK: ${{inputs.check}}
       ACTION_SHA: ${{github.sha}}
       ACTION_RUN_ID: ${{github.run_id}}
     working-directory: ${{inputs.working-directory}}

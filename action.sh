@@ -6,11 +6,14 @@ set -ue
 : "${ACTION_SERVER_URL:=""}"
 : "${ACTION_REPOSITORY:=""}"
 : "${ACTION_BRANCH:=""}"
+: "${ACTION_CHECK:=1}"
 : "${ACTION_SHA:=""}"
 : "${ACTION_RUN_ID:=0}"
 
 main() {
 	status=0
+
+	ACTION_CHECK=$(to_bool "$ACTION_CHECK" 1)
 
 	dir=$(mktemp -d)
 
@@ -27,9 +30,15 @@ main() {
 	mv "$dir/.git" .
 	rm -rf "$dir"
 
-	if check; then
-		log "[info] The branch is up-to-date."
-		return $status
+	if [ "$ACTION_CHECK" -ne 0 ]; then
+		log "[info] Checking the branch."
+
+		if check; then
+			log "[info] The branch is up-to-date."
+			return $status
+		fi
+
+		log "[info] The branch is not up-to-date."
 	fi
 
 	log "[info] Resetting the branch."
@@ -103,6 +112,21 @@ commit() {
 	git add .
 	git commit --message "$head" --message "$(printf "%b" "$body")" --quiet
 	git push --force --quiet
+}
+
+to_bool() {
+	case "$(printf "%s" "$1" | tr "[:upper:]" "[:lower:]")" in
+	yes|y|true|t|1)
+		echo 1
+		;;
+	no|n|false|f|0)
+		echo 0
+		;;
+	*)
+		# shellcheck disable=SC2086
+		echo $2
+		;;
+	esac
 }
 
 log() {
