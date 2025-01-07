@@ -120,10 +120,10 @@ commit() {
 
 to_bool() {
 	case "$(printf "%s" "$1" | tr "[:upper:]" "[:lower:]")" in
-	yes|y|true|t|1)
+	yes | y | true | t | 1)
 		echo 1
 		;;
-	no|n|false|f|0)
+	no | n | false | f | 0)
 		echo 0
 		;;
 	*)
