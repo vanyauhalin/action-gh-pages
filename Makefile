@@ -11,5 +11,5 @@ build: # Build action
 
 .PHONY: lint
 lint: # Lint scripts
-	@shellcheck *.sh
+	@shellcheck --shell busybox *.sh
 	@shfmt --diff *.sh
