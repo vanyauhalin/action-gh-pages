@@ -4,6 +4,8 @@ This document records all notable changes to the project, following the [Keep a 
 
 ## [Unreleased]
 
+There are no noticeable changes in version [unreleased].
+
 ## [0.0.8] - 2025-01-07
 
 ### Fixed
